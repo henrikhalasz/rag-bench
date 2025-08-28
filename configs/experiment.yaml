@@ -1,0 +1,14 @@
+dataset:
+  path: data/eval/nasa_8739_qa_small.jsonl
+
+run:
+  models: [gemma-3-270m-it-tf, tinyllama-1.1b-chat-tf, qwen2.5-1.5b-instruct-tf, mistral-7b-instruct-tf, gpt-4]
+  seed: 42
+  n_max: null         # run all questions
+  timeout_s: 60
+  rag_config: configs/rag.yaml
+
+report:
+  out_dir: results/${date}_baseline
+  save_raw: true
+

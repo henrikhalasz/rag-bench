@@ -1,0 +1,327 @@
+{
+  "aggregate_metrics": {
+    "hit_rate": 0.95,
+    "mean_mrr": 0.925,
+    "mean_ndcg": 0.9081898867742553,
+    "mean_latency": 1.4326796174049377,
+    "total_questions": 20,
+    "valid_questions": 20,
+    "failed_questions": 0
+  },
+  "per_question_results": [
+    {
+      "question": "What magnification range does the standard require for visual inspection?",
+      "ground_truth_ids": [
+        "c29"
+      ],
+      "retrieved_ids": [
+        "c29",
+        "c225",
+        "c129"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.6479620933532715
+    },
+    {
+      "question": "When Electrostatic Discharge (ESD) control is required during work, which standard governs ESD control procedures?",
+      "ground_truth_ids": [
+        "c28"
+      ],
+      "retrieved_ids": [
+        "c28",
+        "c228",
+        "c19"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.5815112590789795
+    },
+    {
+      "question": "Is spiral wrap sleeving permitted on mission-critical or flight hardware, including launch vehicles?",
+      "ground_truth_ids": [
+        "c68"
+      ],
+      "retrieved_ids": [
+        "c68",
+        "c69",
+        "c33"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.5191011428833008
+    },
+    {
+      "question": "For a harness diameter larger than 25.4 mm (1.00 in), what is the maximum allowed distance between harness ties or supports?",
+      "ground_truth_ids": [
+        "c49"
+      ],
+      "retrieved_ids": [
+        "c49",
+        "c55",
+        "c54"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4888110160827637
+    },
+    {
+      "question": "In the crimp pull test table, what is the minimum tensile strength for 16 AWG copper?",
+      "ground_truth_ids": [
+        "c116"
+      ],
+      "retrieved_ids": [
+        "c114",
+        "c116",
+        "c126"
+      ],
+      "hit_rate": true,
+      "mrr": 0.5,
+      "ndcg": 0.6309297535714575,
+      "latency_seconds": 1.2530579566955566
+    },
+    {
+      "question": "Are temporary identification markers allowed during in-process wiring and harnessing, and what constraint applies?",
+      "ground_truth_ids": [
+        "c40"
+      ],
+      "retrieved_ids": [
+        "c40",
+        "c137",
+        "c32"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4780058860778809
+    },
+    {
+      "question": "What does the standard require regarding cleanliness of assembled coaxial connectors?",
+      "ground_truth_ids": [
+        "c141"
+      ],
+      "retrieved_ids": [
+        "c141",
+        "c139",
+        "c136"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4960131645202637
+    },
+    {
+      "question": "For manual crimping tools, what feature is required to prevent premature tool opening?",
+      "ground_truth_ids": [
+        "c112"
+      ],
+      "retrieved_ids": [
+        "c112",
+        "c205",
+        "c113"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4869768619537354
+    },
+    {
+      "question": "According to the definitions, what is a ferrule?",
+      "ground_truth_ids": [
+        "c22"
+      ],
+      "retrieved_ids": [
+        "c22",
+        "c93",
+        "c192"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 0.8689956665039062
+    },
+    {
+      "question": "According to the definitions section, what does “Certification” mean in this standard?",
+      "ground_truth_ids": [
+        "c21"
+      ],
+      "retrieved_ids": [
+        "c26",
+        "c225",
+        "c227"
+      ],
+      "hit_rate": false,
+      "mrr": 0.0,
+      "ndcg": 0.0,
+      "latency_seconds": 1.4311378002166748
+    },
+    {
+      "question": "Summarize the key design parameters for mockups and wiring boards used to route and build harnesses.",
+      "ground_truth_ids": [
+        "c40"
+      ],
+      "retrieved_ids": [
+        "c40",
+        "c34",
+        "c32"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4858980178833008
+    },
+    {
+      "question": "Summarize the general design provisions for interconnecting harnesses in Section 7.1.1.",
+      "ground_truth_ids": [
+        "c32"
+      ],
+      "retrieved_ids": [
+        "c32",
+        "c33",
+        "c35"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.466588020324707
+    },
+    {
+      "question": "Summarize the general test points for dielectric/insulation tests on an interconnecting cable or harness assembly.",
+      "ground_truth_ids": [
+        "c150"
+      ],
+      "retrieved_ids": [
+        "c150",
+        "c149",
+        "c232"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4890937805175781
+    },
+    {
+      "question": "Summarize the guidance for installing metal braid shielding over a harness.",
+      "ground_truth_ids": [
+        "c72"
+      ],
+      "retrieved_ids": [
+        "c72",
+        "c35",
+        "c232"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4918649196624756
+    },
+    {
+      "question": "Which cleaning solvents are specified for assembled coaxial connectors?",
+      "ground_truth_ids": [
+        "c141"
+      ],
+      "retrieved_ids": [
+        "c141",
+        "c139",
+        "c136"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4667508602142334
+    },
+    {
+      "question": "What are the differences in use cases between a lap splice and a butt splice?",
+      "ground_truth_ids": [
+        "c206",
+        "c154"
+      ],
+      "retrieved_ids": [
+        "c154",
+        "c206",
+        "c208"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4637858867645264
+    },
+    {
+      "question": "Compare spiral wrap sleeving and metal braid shielding in terms of allowed usage and preparation.",
+      "ground_truth_ids": [
+        "c72",
+        "c68"
+      ],
+      "retrieved_ids": [
+        "c72",
+        "c68",
+        "c233"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4655489921569824
+    },
+    {
+      "question": "How do lacing requirements differ between small breakouts and large breakouts?",
+      "ground_truth_ids": [
+        "c46",
+        "c58"
+      ],
+      "retrieved_ids": [
+        "c58",
+        "c45",
+        "c46"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 0.9197207891481876,
+      "latency_seconds": 1.4922800064086914
+    },
+    {
+      "question": "When securing braided sleeving over a bundle, how do lacing and plastic straps compare, and what constraints apply to straps?",
+      "ground_truth_ids": [
+        "c70",
+        "c60"
+      ],
+      "retrieved_ids": [
+        "c60",
+        "c62",
+        "c64"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 0.6131471927654584,
+      "latency_seconds": 1.1321070194244385
+    },
+    {
+      "question": "What does the standard require for inspection optics and task lighting near areas where cabling/wiring is worked?",
+      "ground_truth_ids": [
+        "c27",
+        "c29"
+      ],
+      "retrieved_ids": [
+        "c27",
+        "c29",
+        "c225"
+      ],
+      "hit_rate": true,
+      "mrr": 1.0,
+      "ndcg": 1.0,
+      "latency_seconds": 1.4481019973754883
+    }
+  ],
+  "evaluation_config": {
+    "eval_dataset": "data/eval/01_NASA_eval_FIXED.jsonl",
+    "datastore_path": "data/processed/embeddings/e48a433d891163b9.vectors.parquet",
+    "faiss_index": "data/processed/embeddings/e48a433d891163b9.index.faiss",
+    "top_k": 3,
+    "top_k_dense": 10,
+    "top_k_sparse": 1,
+    "rrf_k": 60
+  }
+}

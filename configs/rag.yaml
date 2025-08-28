@@ -1,0 +1,6 @@
+chunk_size_tokens: 384
+chunk_overlap_tokens: 50
+top_k: 8
+embedding_model: sentence-transformers/all-MiniLM-L6-v2
+store: faiss
+index_dir: data/processed/index

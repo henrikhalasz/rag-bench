@@ -1,0 +1,41 @@
+# --- Python Virtual Environments ---
+.venv/
+venv/
+env/
+.env
+__pypackages__/
+
+# --- Python Cache & Artefacts ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# --- IDE & Editor Configs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS-specific Files ---
+.DS_Store
+Thumbs.db
+
+# --- Data, Models & Logs ---
+# NOTE: Use Git LFS for large files you *do* want to track.
+# These entries are for local-only files you *never* want to track.
+data/raw/*
+data/processed/*
+models/*
+logs/
+*.log
+
+# --- Notebooks & Experiment Artefacts ---
+.ipynb_checkpoints/
+experiments/outputs/

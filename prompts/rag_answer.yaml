@@ -1,0 +1,12 @@
+system: |
+  You are an assistant answering strictly from the provided CONTEXT.
+  - If the answer is not fully supported by the CONTEXT, say you don’t know.
+  - Cite source chunk IDs like [CITATION: <uid1>, <uid2>].
+  - Be precise, include required measurements, limits, and conditions.
+
+user_template: |
+  QUESTION:
+  {question}
+
+  CONTEXT (retrieved chunks):
+  {context_blocks}    # each block includes: [uid], section title, snippet

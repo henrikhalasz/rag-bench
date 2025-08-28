@@ -1,0 +1,68 @@
+open_source:
+  # Tiny, safe on MPS in float32; good for "minimal capability" baseline
+  - id: gemma-3-270m-it-tf
+    backend: transformers
+    model_id: google/gemma-3-270m-it
+    load: { dtype: float32, device_map: auto }
+
+  # Strong small model; fits comfortably; good everyday local baseline
+  - id: qwen2.5-1.5b-instruct-tf
+    backend: transformers
+    model_id: Qwen/Qwen2.5-1.5B-Instruct
+    load: { dtype: float16, device_map: auto }
+
+  # Very small, fast sanity check model to keep iteration snappy
+  - id: tinyllama-1.1b-chat-tf
+    backend: transformers
+    model_id: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+    load: { dtype: float16, device_map: auto }
+
+  # Commenting out 7B+ models - too large for Apple Silicon without quantization
+  # bitsandbytes is not supported on macOS, so these would load in full precision
+  # --- GGUF models for Apple Silicon (llama-cpp backend) ---
+  # This is the correct way to run quantized models on macOS
+  - id: mistral-7b-instruct-gguf
+    backend: llama-cpp
+    model_id: TheBloke/Mistral-7B-Instruct-v0.2-GGUF
+    # Filename of the specific GGUF model to use from the repo
+    model_file: mistral-7b-instruct-v0.2.Q4_K_M.gguf
+    load:
+      # -1 sends all possible layers to Metal GPU
+      n_gpu_layers: -1
+      # Context size
+      n_ctx: 2048
+      # Lower temperature for more deterministic output
+      temperature: 0.1
+
+  # --- Transformers models (for CPU or non-Apple GPU) ---
+  # Commenting out 7B+ models - too large for Apple Silicon without quantization
+  # bitsandbytes is not supported on macOS, so these would load in full precision
+  # - id: mistral-7b-instruct-tf
+  #   backend: transformers  
+  #   model_id: mistralai/Mistral-7B-Instruct-v0.3
+  #   load: { 
+  #     dtype: float16, 
+  #     device_map: auto,
+  #     load_in_4bit: true,
+  #     bnb_4bit_compute_dtype: float16,
+  #     bnb_4bit_quant_type: nf4,
+  #     bnb_4bit_use_double_quant: true
+  #   }
+
+  # Commenting out 8B model for now - too large even with quantization
+  # - id: llama-3.1-8b-instruct-tf
+  #   backend: transformers
+  #   model_id: meta-llama/Meta-Llama-3.1-8B-Instruct
+  #   load: { 
+  #     dtype: float16, 
+  #     device_map: auto,
+  #     load_in_4bit: true,
+  #     bnb_4bit_compute_dtype: float16,
+  #     bnb_4bit_quant_type: nf4,
+  #     bnb_4bit_use_double_quant: true
+  #   }
+
+closed_source:
+  - id: gpt-4
+    provider: openai
+    model: gpt-4o
