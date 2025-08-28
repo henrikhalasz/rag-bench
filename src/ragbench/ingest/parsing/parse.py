@@ -7,7 +7,11 @@ Processes PDFs under data/raw/ and emits normalized JSONL + extracted images.
 import argparse
 import logging
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Iterator
+from concurrent.futures import ProcessPoolExecutor
+from os import cpu_count
+from functools import partial
+from tqdm import tqdm
 
 from .processors import (
     parse_pdf_with_unstructured, extract_element_data,
@@ -121,8 +125,8 @@ def main() -> int:
                        help="Disable hi_res strategy, use fast only")
     parser.add_argument("--table-fallback", choices=["camelot", "none"], default="none",
                        help="Table extraction fallback method (default: none)")
-    parser.add_argument("--workers", type=int, default=1,
-                       help="Number of parallel workers (default: 1)")
+    parser.add_argument("--workers", type=int, default=max(1, cpu_count() // 2),
+                       help="Number of parallel workers (default: half of CPU cores)")
     parser.add_argument("--debug", action="store_true",
                        help="Enable debug logging")
     
@@ -149,21 +153,41 @@ def main() -> int:
     # Sort files for deterministic processing
     pdf_files.sort()
     
-    logger.info(f"Found {len(pdf_files)} PDF files to process")
+    logger.info(f"Found {len(pdf_files)} PDF files to process with {args.workers} worker(s)")
     
     # Validate Camelot if needed
     if args.table_fallback == "camelot" and not HAS_CAMELOT:
         logger.error("camelot-py not installed but --table-fallback camelot requested. Install with: pip install camelot-py[cv]")
         return 1
     
-    # Process files
-    use_hires = not args.no_hires
+    # --- OPTIMIZED PROCESSING LOOP ---
     all_stats = []
     
-    for pdf_path in pdf_files:
-        stats = process_pdf(pdf_path, args.out, use_hires, args.table_fallback)
-        all_stats.append(stats)
+    # Use functools.partial to prepare the worker function with its static arguments
+    worker_func = partial(
+        process_pdf,
+        output_dir=args.out,
+        use_hires=not args.no_hires,
+        table_fallback=args.table_fallback,
+    )
+
+    results_iterator: Iterator[Dict[str, Any]]
+
+    if args.workers > 1:
+        with ProcessPoolExecutor(max_workers=args.workers) as executor:
+            # Use executor.map for more efficient batching of tasks
+            # A calculated chunksize reduces overhead for a large number of files
+            chunksize = max(1, len(pdf_files) // (args.workers * 4))
+            results_iterator = executor.map(worker_func, pdf_files, chunksize=chunksize)
+    else:
+        # Fallback to a simple map for sequential processing (easier debugging)
+        logger.info("Running in single-threaded mode.")
+        results_iterator = map(worker_func, pdf_files)
     
+    # Collect results with a single progress bar
+    for stats in tqdm(results_iterator, total=len(pdf_files), desc="Processing PDFs"):
+        all_stats.append(stats)
+
     # Summary
     successful = [s for s in all_stats if s["success"]]
     failed = [s for s in all_stats if not s["success"]]
@@ -173,19 +197,21 @@ def main() -> int:
     total_tables = sum(s["tables"] for s in successful)
     total_images = sum(s["images"] for s in successful)
     
+    # The summary is now logged after the progress bar is finished, giving a clean output
     logger.info(f"\n=== SUMMARY ===")
-    logger.info(f"Files processed: {len(successful)}/{len(pdf_files)}")
-    logger.info(f"Total elements: {total_elements}")
-    logger.info(f"Total pages: {total_pages}")
-    logger.info(f"Total tables: {total_tables}")
-    logger.info(f"Total images: {total_images}")
+    logger.info(f"Successfully processed: {len(successful)}/{len(pdf_files)}")
+    if total_elements > 0:
+        logger.info(f"  - Total elements extracted: {total_elements}")
+        logger.info(f"  - Total pages covered: {total_pages}")
+        logger.info(f"  - Total tables found: {total_tables}")
+        logger.info(f"  - Total images saved: {total_images}")
     
     if failed:
-        logger.warning(f"Failed files: {len(failed)}")
+        logger.warning(f"Failed to process: {len(failed)}")
         for stats in failed:
-            logger.warning(f"  {stats['file']}: {stats['error']}")
+            logger.warning(f"  - {stats['file']}: {stats['error']}")
     
-    return 0 if successful else 1
+    return 0 if not failed else 1
 
 
 if __name__ == "__main__":
